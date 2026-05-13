@@ -1,7 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown, Phone } from 'lucide-react'
 
 const serviciosLinks = [
@@ -45,27 +47,29 @@ export function Header() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-navy/95 backdrop-blur-md shadow-lg py-2'
-            : 'bg-transparent py-4'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 py-3">
+        {/* Background layer — only opacity animates (GPU composited, zero layout recalc) */}
+        <div
+          className="absolute inset-0 bg-navy/95 backdrop-blur-md shadow-lg"
+          style={{
+            opacity: scrolled ? 1 : 0,
+            transition: 'opacity 280ms ease',
+            willChange: 'opacity',
+          }}
+        />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-full bg-cyan flex items-center justify-center shrink-0">
-              <span className="text-white font-display font-bold text-sm">AV</span>
-            </div>
-            <div className="leading-none">
-              <span className="text-white font-display text-base font-semibold tracking-wide">
-                ALBERCAS
-              </span>
-              <span className="text-cyan font-display text-base font-bold tracking-widest">
-                VIP
-              </span>
-            </div>
+          <Link href="/" className="flex items-center shrink-0">
+            <Image
+              src="/logo.png"
+              alt="AlbercasVIP"
+              width={180}
+              height={44}
+              priority
+              className="h-9 w-auto object-contain"
+              unoptimized
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -76,34 +80,44 @@ export function Header() {
                   <button
                     onClick={() => toggleDropdown(item.label)}
                     onBlur={() => setTimeout(() => setOpenDropdown(null), 150)}
-                    className="flex items-center gap-1 text-white/90 hover:text-cyan text-sm font-body px-3 py-2 rounded transition-colors"
+                    className="flex items-center gap-1 text-white/90 hover:text-cyan text-sm font-body px-3 py-2 rounded transition-colors duration-200"
                   >
                     {item.label}
                     <ChevronDown
                       size={14}
-                      className={`transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`}
+                      className="transition-transform duration-200"
+                      style={{ transform: openDropdown === item.label ? 'rotate(180deg)' : 'none' }}
                     />
                   </button>
-                  {openDropdown === item.label && (
-                    <div className="absolute top-full left-0 mt-1 w-52 bg-navy-dark border border-white/10 rounded-lg shadow-xl overflow-hidden">
-                      {item.dropdown.map((sub) => (
-                        <Link
-                          key={sub.href}
-                          href={sub.href}
-                          className="block px-4 py-2.5 text-sm text-white/80 hover:text-cyan hover:bg-white/5 transition-colors"
-                          onClick={() => setOpenDropdown(null)}
-                        >
-                          {sub.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                  <AnimatePresence>
+                    {openDropdown === item.label && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
+                        style={{ willChange: 'transform, opacity' }}
+                        className="absolute top-full left-0 mt-1 w-52 bg-navy-dark border border-white/10 rounded-lg shadow-xl overflow-hidden"
+                      >
+                        {item.dropdown.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            className="block px-4 py-2.5 text-sm text-white/80 hover:text-cyan hover:bg-white/5 transition-colors duration-150"
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ) : (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-white/90 hover:text-cyan text-sm font-body px-3 py-2 rounded transition-colors"
+                  className="text-white/90 hover:text-cyan text-sm font-body px-3 py-2 rounded transition-colors duration-200"
                 >
                   {item.label}
                 </Link>
@@ -115,14 +129,14 @@ export function Header() {
           <div className="flex items-center gap-3">
             <a
               href="tel:+523329765739"
-              className="hidden md:flex items-center gap-1.5 text-white/70 hover:text-cyan text-sm transition-colors"
+              className="hidden md:flex items-center gap-1.5 text-white/70 hover:text-cyan text-sm transition-colors duration-200"
             >
               <Phone size={14} />
               <span className="font-body">33 2976 5739</span>
             </a>
             <Link
               href="/contacto"
-              className="hidden sm:inline-flex items-center px-4 py-2 bg-cyan hover:bg-cyan-light text-white text-sm font-body font-medium rounded-full transition-colors"
+              className="hidden sm:inline-flex items-center px-4 py-2 bg-cyan hover:bg-cyan-light text-white text-sm font-body font-medium rounded-full transition-colors duration-200"
             >
               Cotiza tu proyecto
             </Link>
@@ -137,69 +151,81 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile overlay */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-[60] bg-navy flex flex-col">
-          <div className="flex items-center justify-between px-4 py-4 border-b border-white/10">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-cyan flex items-center justify-center">
-                <span className="text-white font-display font-bold text-xs">AV</span>
-              </div>
-              <span className="text-white font-display font-semibold">ALBERCAS<span className="text-cyan font-bold">VIP</span></span>
+      {/* Mobile overlay — framer-motion para entrada/salida suave */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.28, ease: [0.32, 0, 0.67, 0] }}
+            style={{ willChange: 'transform' }}
+            className="fixed inset-0 z-[60] bg-navy flex flex-col"
+          >
+            <div className="flex items-center justify-between px-4 py-4 border-b border-white/10">
+              <Image
+                src="/logo.png"
+                alt="AlbercasVIP"
+                width={160}
+                height={40}
+                className="h-8 w-auto object-contain"
+                unoptimized
+              />
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="text-white/70 hover:text-white transition-colors"
+              >
+                <X size={24} />
+              </button>
             </div>
-            <button
-              onClick={() => setMobileOpen(false)}
-              className="text-white/70 hover:text-white"
-            >
-              <X size={24} />
-            </button>
-          </div>
-          <nav className="flex-1 overflow-y-auto py-4 px-4 space-y-1">
-            {navLinks.map((item) => (
-              <div key={item.label}>
-                <Link
-                  href={item.href}
-                  className="block text-lg text-white/90 hover:text-cyan py-3 border-b border-white/5 font-body transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.label}
-                </Link>
-                {item.dropdown && (
-                  <div className="pl-4 space-y-0.5 mt-1 mb-2">
-                    {item.dropdown.map((sub) => (
-                      <Link
-                        key={sub.href}
-                        href={sub.href}
-                        className="block text-sm text-white/60 hover:text-cyan py-2 font-body transition-colors"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {sub.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-          <div className="px-4 py-6 border-t border-white/10 space-y-3">
-            <Link
-              href="/contacto"
-              className="block w-full text-center py-3 bg-cyan text-white font-body font-semibold rounded-full"
-              onClick={() => setMobileOpen(false)}
-            >
-              Cotiza tu proyecto
-            </Link>
-            <a
-              href="https://wa.me/5213310808938"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-center py-3 border border-white/20 text-white font-body rounded-full hover:border-cyan transition-colors"
-            >
-              WhatsApp Ventas
-            </a>
-          </div>
-        </div>
-      )}
+            <nav className="flex-1 overflow-y-auto py-4 px-4 space-y-1">
+              {navLinks.map((item) => (
+                <div key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="block text-lg text-white/90 hover:text-cyan py-3 border-b border-white/5 font-body transition-colors duration-200"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.dropdown && (
+                    <div className="pl-4 space-y-0.5 mt-1 mb-2">
+                      {item.dropdown.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          href={sub.href}
+                          className="block text-sm text-white/60 hover:text-cyan py-2 font-body transition-colors duration-200"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+            <div className="px-4 py-6 border-t border-white/10 space-y-3">
+              <Link
+                href="/contacto"
+                className="block w-full text-center py-3 bg-cyan text-white font-body font-semibold rounded-full"
+                onClick={() => setMobileOpen(false)}
+              >
+                Cotiza tu proyecto
+              </Link>
+              <a
+                href="https://wa.me/5213310808938"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center py-3 border border-white/20 text-white font-body rounded-full hover:border-cyan transition-colors duration-200"
+              >
+                WhatsApp Ventas
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

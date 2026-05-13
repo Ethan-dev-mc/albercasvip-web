@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Image from 'next/image'
 
 const WORD_A = 'ALBERCAS'.split('')
 const WORD_B = 'VIP'.split('')
@@ -38,7 +39,7 @@ export function LoadingScreen() {
               <motion.div
                 key={i}
                 className="absolute rounded-full border border-cyan/20"
-                style={{ width: 160 + i * 110, height: 160 + i * 110 }}
+                style={{ width: 160 + i * 110, height: 160 + i * 110, willChange: 'transform, opacity' }}
                 animate={{ scale: [1, 1.4], opacity: [0.4, 0] }}
                 transition={{
                   duration: 2.5,
@@ -61,14 +62,23 @@ export function LoadingScreen() {
 
           {/* Content */}
           <div className="relative flex flex-col items-center gap-6">
-            {/* AV Logo */}
+            {/* Logo icon */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 240, damping: 20, delay: 0.15 }}
-              className="w-20 h-20 rounded-full bg-cyan flex items-center justify-center shadow-lg shadow-cyan/30"
+              style={{ willChange: 'transform, opacity' }}
+              className="w-20 h-20 flex items-center justify-center"
             >
-              <span className="font-display font-black text-white text-2xl tracking-tight">AV</span>
+              <Image
+                src="/logo-icon.png"
+                alt="AlbercasVIP"
+                width={80}
+                height={80}
+                className="w-20 h-20 object-contain drop-shadow-lg"
+                priority
+                unoptimized
+              />
             </motion.div>
 
             {/* Word mark */}
