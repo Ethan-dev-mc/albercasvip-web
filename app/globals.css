@@ -2,21 +2,21 @@
 
 @theme {
   /* ── Brand Colors ─────────────────────────────────────────────────── */
-  --color-navy:        #1A2747;
-  --color-navy-light:  #243360;
-  --color-navy-dark:   #101e35;
-  --color-cyan:        #00BCD4;
-  --color-cyan-light:  #26d1e6;
-  --color-cyan-dark:   #00a5bb;
-  --color-agua:        #7FE3F0;
-  --color-ink:         #1A1A2E;
-  --color-charcoal:    #333333;
-  --color-smoke:       #F4F6F8;
-  --color-offwhite:    #F8FAFB;
+  --color-navy: #1a2747;
+  --color-navy-light: #243360;
+  --color-navy-dark: #101e35;
+  --color-cyan: #00bcd4;
+  --color-cyan-light: #26d1e6;
+  --color-cyan-dark: #00a5bb;
+  --color-agua: #7fe3f0;
+  --color-ink: #1a1a2e;
+  --color-charcoal: #333333;
+  --color-smoke: #f4f6f8;
+  --color-offwhite: #f8fafb;
 
   /* ── Brand Fonts ──────────────────────────────────────────────────── */
-  --font-display:  var(--font-playfair);
-  --font-body:     var(--font-inter);
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-inter);
 }
 
 :root {
@@ -40,7 +40,9 @@ html {
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -48,17 +50,20 @@ html {
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #f4f6f8; }
-::-webkit-scrollbar-thumb { background: #1A2747; border-radius: 3px; }
-
-/* Hide default cursor on desktop when custom cursor is active */
-@media (pointer: fine) {
-  html, * { cursor: none !important; }
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f6f8;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a2747;
+  border-radius: 3px;
 }
 
 /* GPU acceleration for animated elements */
-[data-parallax], .parallax-layer {
+[data-parallax],
+.parallax-layer {
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
