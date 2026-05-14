@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
+import { LogoIcon } from '@/components/ui/Logo'
 
 const WORD_A = 'ALBERCAS'.split('')
 const WORD_B = 'VIP'.split('')
@@ -68,17 +68,8 @@ export function LoadingScreen() {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: 'spring', stiffness: 240, damping: 20, delay: 0.15 }}
               style={{ willChange: 'transform, opacity' }}
-              className="w-20 h-20 flex items-center justify-center"
             >
-              <Image
-                src="/logo-icon.png"
-                alt="AlbercasVIP"
-                width={80}
-                height={80}
-                className="w-20 h-20 object-contain drop-shadow-lg"
-                priority
-                unoptimized
-              />
+              <LogoIcon />
             </motion.div>
 
             {/* Word mark */}

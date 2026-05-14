@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { MapPin, Phone, Mail } from 'lucide-react'
+import { LogoHorizontal } from '@/components/ui/Logo'
 
 const FacebookIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" width={16} height={16}>
@@ -24,13 +25,8 @@ export function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-full bg-cyan flex items-center justify-center shrink-0">
-                <span className="text-white font-display font-bold text-sm">AV</span>
-              </div>
-              <span className="font-display text-lg font-semibold">
-                ALBERCAS<span className="text-cyan font-bold">VIP</span>
-              </span>
+            <div className="mb-4">
+              <LogoHorizontal textSize="lg" />
             </div>
             <p className="font-display italic text-white/70 text-sm leading-relaxed mb-6">
               "Diseñamos espacios que crean historias"

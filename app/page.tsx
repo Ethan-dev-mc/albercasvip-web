@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter'
 import { FadeIn } from '@/components/ui/FadeIn'
+import { HomeMiniForm } from '@/components/sections/HomeMiniForm'
 
 export const metadata: Metadata = {
   title: 'AlbercasVIP — Albercas Premium con Tecnología RENOLIT en Guadalajara',
@@ -439,45 +440,7 @@ export default function HomePage() {
             </p>
           </FadeIn>
           <FadeIn delay={0.15}>
-            <div className="bg-white/10 backdrop-blur border border-white/20 rounded-3xl p-6 sm:p-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                <input
-                  type="text"
-                  placeholder="Tu nombre"
-                  className="w-full px-4 py-3 rounded-xl bg-white/15 border border-white/20 text-white placeholder-white/50 font-body text-sm focus:outline-none focus:border-cyan transition-colors"
-                />
-                <input
-                  type="tel"
-                  placeholder="Tu teléfono (WhatsApp)"
-                  className="w-full px-4 py-3 rounded-xl bg-white/15 border border-white/20 text-white placeholder-white/50 font-body text-sm focus:outline-none focus:border-cyan transition-colors"
-                />
-              </div>
-              <select className="w-full px-4 py-3 rounded-xl bg-white/15 border border-white/20 text-white/80 font-body text-sm mb-4 focus:outline-none focus:border-cyan transition-colors">
-                <option value="" className="text-charcoal">Tipo de proyecto</option>
-                <option value="construccion" className="text-charcoal">Construcción de alberca nueva</option>
-                <option value="renovacion" className="text-charcoal">Renovación sin demolición</option>
-                <option value="mantenimiento" className="text-charcoal">Mantenimiento</option>
-                <option value="edificio" className="text-charcoal">Alberca en edificio o azotea</option>
-                <option value="equipamiento" className="text-charcoal">Equipamiento</option>
-              </select>
-              <Link
-                href="/contacto"
-                className="block w-full py-3.5 bg-cyan hover:bg-cyan-light text-white font-body font-semibold rounded-xl text-center transition-colors"
-              >
-                Solicitar cotización
-              </Link>
-              <p className="mt-4 text-white/40 text-xs font-body text-center">
-                o escríbenos directamente por WhatsApp →{' '}
-                <a
-                  href="https://wa.me/5213310808938?text=Hola,%20quiero%20cotizar%20un%20proyecto"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cyan hover:underline"
-                >
-                  +52 33 1080 8938
-                </a>
-              </p>
-            </div>
+            <HomeMiniForm />
           </FadeIn>
         </div>
       </section>

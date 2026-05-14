@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ChevronDown, Phone } from 'lucide-react'
+import { LogoHorizontal } from '@/components/ui/Logo'
 
 const serviciosLinks = [
   { href: '/servicios/construccion', label: 'Construcción' },
@@ -61,15 +61,7 @@ export function Header() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
-            <Image
-              src="/logo.png"
-              alt="AlbercasVIP"
-              width={180}
-              height={44}
-              priority
-              className="h-9 w-auto object-contain"
-              unoptimized
-            />
+            <LogoHorizontal />
           </Link>
 
           {/* Desktop nav */}
@@ -164,14 +156,7 @@ export function Header() {
             className="fixed inset-0 z-[60] bg-navy flex flex-col"
           >
             <div className="flex items-center justify-between px-4 py-4 border-b border-white/10">
-              <Image
-                src="/logo.png"
-                alt="AlbercasVIP"
-                width={160}
-                height={40}
-                className="h-8 w-auto object-contain"
-                unoptimized
-              />
+              <LogoHorizontal className="h-8" />
               <button
                 onClick={() => setMobileOpen(false)}
                 className="text-white/70 hover:text-white transition-colors"
