@@ -26,7 +26,7 @@ export function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             <div className="mb-4">
-              <LogoHorizontal size="lg" />
+              <LogoHorizontal />
             </div>
             <p className="font-display italic text-white/70 text-sm leading-relaxed mb-6">
               "Diseñamos espacios que crean historias"

@@ -2,10 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { LogoIcon } from '@/components/ui/Logo'
-
-const WORD_A = 'ALBERCAS'.split('')
-const WORD_B = 'VIP'.split('')
+import { LogoScreen } from '@/components/ui/Logo'
 
 export function LoadingScreen() {
   const [shouldRender, setShouldRender] = useState(false)
@@ -62,46 +59,15 @@ export function LoadingScreen() {
 
           {/* Content */}
           <div className="relative flex flex-col items-center gap-6">
-            {/* Logo icon */}
+            {/* Full logo (mascot + text) */}
             <motion.div
-              initial={{ scale: 0, opacity: 0 }}
+              initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 240, damping: 20, delay: 0.15 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 22, delay: 0.15 }}
               style={{ willChange: 'transform, opacity' }}
             >
-              <LogoIcon />
+              <LogoScreen />
             </motion.div>
-
-            {/* Word mark */}
-            <div className="flex items-center gap-2">
-              <div className="flex gap-[1px]">
-                {WORD_A.map((letter, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.45 + i * 0.045, duration: 0.35, ease: 'easeOut' }}
-                    className="font-display font-bold text-white text-4xl sm:text-5xl tracking-[0.06em]"
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </div>
-              <div className="w-2 sm:w-3" />
-              <div className="flex gap-[1px]">
-                {WORD_B.map((letter, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9 + i * 0.07, duration: 0.35, ease: 'easeOut' }}
-                    className="font-display font-bold text-cyan text-4xl sm:text-5xl tracking-[0.06em]"
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </div>
-            </div>
 
             {/* Tagline */}
             <motion.p
