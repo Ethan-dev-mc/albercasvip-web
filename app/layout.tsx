@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { LoadingScreen } from "@/components/layout/LoadingScreen";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -125,6 +126,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased min-h-screen flex flex-col">
         <SmoothScrollProvider>
+          <ScrollProgress />
           <LoadingScreen />
           <Header />
           <main className="flex-1">{children}</main>
