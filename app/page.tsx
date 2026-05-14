@@ -8,6 +8,8 @@ import {
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { HomeMiniForm } from '@/components/sections/HomeMiniForm'
+import { HeroParallaxBg } from '@/components/ui/HeroParallaxBg'
+import { ParallaxLayer } from '@/components/ui/ParallaxLayer'
 
 export const metadata: Metadata = {
   title: 'AlbercasVIP — Albercas Premium con Tecnología RENOLIT en Guadalajara',
@@ -160,13 +162,10 @@ export default function HomePage() {
     <>
       {/* ── 1. HERO ──────────────────────────────────────────────────────── */}
       <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-        <Image
+        <HeroParallaxBg
           src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=1920&q=85"
           alt="Alberca premium AlbercasVIP"
-          fill
           priority
-          className="object-cover"
-          unoptimized
         />
         <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent" />
@@ -269,15 +268,17 @@ export default function HomePage() {
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {diferenciadores.map((d, i) => (
-              <FadeIn key={d.titulo} delay={(i % 5) * 0.08}>
-                <div className="group flex flex-col bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan/30 rounded-2xl p-5 transition-all duration-300 h-full">
-                  <div className="w-10 h-10 rounded-lg bg-cyan/10 flex items-center justify-center mb-4">
-                    <d.icon size={20} className="text-cyan" />
+              <ParallaxLayer key={d.titulo} speed={(i % 3) * 0.08}>
+                <FadeIn delay={(i % 5) * 0.08}>
+                  <div className="group flex flex-col bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan/30 rounded-2xl p-5 transition-all duration-300 h-full hover:scale-[1.03] hover:shadow-lg hover:shadow-cyan/10">
+                    <div className="w-10 h-10 rounded-lg bg-cyan/10 group-hover:bg-cyan/20 flex items-center justify-center mb-4 transition-colors group-hover:scale-110 transition-transform duration-200">
+                      <d.icon size={20} className="text-cyan" />
+                    </div>
+                    <h3 className="font-body font-semibold text-white text-sm mb-2">{d.titulo}</h3>
+                    <p className="text-white/50 font-body text-xs leading-relaxed">{d.desc}</p>
                   </div>
-                  <h3 className="font-body font-semibold text-white text-sm mb-2">{d.titulo}</h3>
-                  <p className="text-white/50 font-body text-xs leading-relaxed">{d.desc}</p>
-                </div>
-              </FadeIn>
+                </FadeIn>
+              </ParallaxLayer>
             ))}
           </div>
         </div>
@@ -370,7 +371,7 @@ export default function HomePage() {
                   src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=85"
                   alt="Sistema RENOLIT ALKORPLAN"
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
                   unoptimized
                 />
                 <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur rounded-2xl px-5 py-4">

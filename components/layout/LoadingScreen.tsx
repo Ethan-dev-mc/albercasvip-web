@@ -61,12 +61,12 @@ export function LoadingScreen() {
           <div className="relative flex flex-col items-center gap-6">
             {/* Full logo (mascot + text) */}
             <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 22, delay: 0.15 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               style={{ willChange: 'transform, opacity' }}
             >
-              <LogoScreen />
+              <LogoScreen className="w-[70vw] max-w-[520px]" />
             </motion.div>
 
             {/* Tagline */}

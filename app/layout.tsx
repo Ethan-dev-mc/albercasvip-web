@@ -4,6 +4,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 import { LoadingScreen } from "@/components/layout/LoadingScreen";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -121,12 +123,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="antialiased min-h-screen flex flex-col">
-        <LoadingScreen />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppWidget />
+      <body className="antialiased min-h-screen flex flex-col cursor-none-desktop">
+        <SmoothScrollProvider>
+          <CustomCursor />
+          <LoadingScreen />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <WhatsAppWidget />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

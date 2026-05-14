@@ -51,3 +51,20 @@ html {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f4f6f8; }
 ::-webkit-scrollbar-thumb { background: #1A2747; border-radius: 3px; }
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (pointer: fine) {
+  html, * { cursor: none !important; }
+}
+
+/* GPU acceleration for animated elements */
+[data-parallax], .parallax-layer {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Smooth image rendering */
+img {
+  -webkit-font-smoothing: antialiased;
+}

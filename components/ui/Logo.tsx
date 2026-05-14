@@ -53,7 +53,7 @@ export function LogoScreen({ className = '' }: { className?: string }) {
   }, [])
 
   return (
-    <div className={`flex items-center justify-center ${className}`}>
+    <div className="flex items-center justify-center">
       <div
         className="w-24 h-24 rounded-full bg-cyan flex items-center justify-center shadow-lg shadow-cyan/30"
         style={{ display: loaded ? 'none' : 'flex' }}
@@ -64,8 +64,8 @@ export function LogoScreen({ className = '' }: { className?: string }) {
         ref={imgRef}
         src={`${BASE}/logo-screen.png`}
         alt="AlbercasVIP"
-        className="max-w-[260px] w-full object-contain drop-shadow-xl"
-        style={{ display: loaded ? 'block' : 'none' }}
+        className={`object-contain ${className || 'w-[70vw] max-w-[520px]'}`}
+        style={{ display: loaded ? 'block' : 'none', mixBlendMode: 'screen' }}
         onLoad={() => setLoaded(true)}
       />
     </div>
